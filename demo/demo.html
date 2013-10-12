@@ -9,11 +9,17 @@
 	</head>
 	<body>
 
-		<div ng-controller="exampleCtrl">
+		<div ng-controller="simpleExampleCtrl">
 
 			Value of select: {{ currentPerson }}<br>
-
 			<select bootstrap-select ng-options="person.name for person in people" ng-model="currentPerson"></select>
+
+		</div>
+
+		<div ng-controller="selectAsExampleCtrl">
+
+			Value of select: {{ currentPerson }}<br>
+			<select bootstrap-select ng-options="person as person for person in people" ng-model="currentPerson"></select>
 
 		</div>
 

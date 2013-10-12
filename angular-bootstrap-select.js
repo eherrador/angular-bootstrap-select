@@ -85,7 +85,9 @@ angular.module('angular-bootstrap-select', [])
 
 			// update the select and the model when our selection changes
 			scope.updateModel = function() {
-				ngModelCtrl.$setViewValue( scope.dropdown.selected.model );
+				var locals = {};
+				locals[valueName] = scope.dropdown.selected.model;
+				ngModelCtrl.$setViewValue( valueFn(scope, locals) );
 				ngModelCtrl.$render();
 			};
 
