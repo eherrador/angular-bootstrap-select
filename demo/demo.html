@@ -1,0 +1,21 @@
+<!doctype html>
+<html ng-app="Demo">
+	<head>
+		<title>Angular Postpone Animation Directive</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
+		<script src="../bootstrap-select.js"></script>
+		<script src="demo.js"></script>
+		<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+	</head>
+	<body>
+
+		<div ng-controller="exampleCtrl">
+
+			Value of select: {{ currentPerson }}<br>
+
+			<select bootstrap-select ng-options="person.name for person in people" ng-model="currentPerson"></select>
+
+		</div>
+
+	</body>
+</html>
