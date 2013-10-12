@@ -53,10 +53,6 @@ angular.module('angular-bootstrap-select', [])
 			};
 
 			var updateOptions = function( items ) {
-				if( !items ) {
-					return;
-				}
-
 				var options = element.find('option');
 				scope.$options = [];
 				angular.forEach(options, function(option) {
@@ -76,7 +72,9 @@ angular.module('angular-bootstrap-select', [])
 				var options = element.find('option');
 				angular.forEach(options, function(option) {
 					var data = angular.element(option).data(BOOTSTRAP_SELECT_DATA);
-					if( data.model === val ) {
+					var locals = {};
+					locals[valueName] = data.model;
+					if( !data || displayFn(scope, locals) === val ) {
 						scope.dropdown.selected = data;
 						return;
 					}
