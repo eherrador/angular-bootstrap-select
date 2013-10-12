@@ -1,0 +1,13 @@
+{
+  "name": "angular-bootstrap-select",
+  "version": "0.0.1",
+  "main": [
+    "./angular-bootstrap-select.js"
+  ],
+  "ignore": [
+    "demo",
+    "**/.*"
+  ],
+  "dependencies": {},
+  "homepage": "https://github.com/dlukez/angular-bootstrap-select"
+}
