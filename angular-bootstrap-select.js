@@ -53,13 +53,19 @@ angular.module('angular-bootstrap-select', [])
 			};
 
 			var updateOptions = function( items ) {
+				if( !items ) {
+					return;
+				}
+
 				var options = element.find('option');
 				scope.$options = [];
 				angular.forEach(options, function(option) {
 					o = angular.element(option);
 					var data = buildObjFromOptionElement(o);
-					if( items[data.value] ) {
+					if( items && items[data.value] ) {
 						data.model = items[data.value];
+					} else {
+						data.model = null;
 					}
 					o.data(BOOTSTRAP_SELECT_DATA, data);
 					scope.$options.push(data);
