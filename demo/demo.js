@@ -1,4 +1,4 @@
-angular.module('Demo', ['bootstrap-select'])
+angular.module('Demo', ['angular-bootstrap-select'])
 
 .controller('exampleCtrl', function($scope) {
 	$scope.people = [

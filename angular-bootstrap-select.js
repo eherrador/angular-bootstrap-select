@@ -1,4 +1,4 @@
-angular.module('bootstrap-select', [])
+angular.module('angular-bootstrap-select', [])
 
 .directive('bootstrapSelect', ['$compile', '$parse', '$timeout', function($compile, $parse, $timeout) {
 
