@@ -12,6 +12,9 @@ angular.module('angular-bootstrap-select', [])
 				return;
 			}
 
+			// options
+			var autoWidth = attrs.autoWidth === "true" ? true : false;
+
 			var BOOTSTRAP_SELECT_DATA = '$bootstrapSelect';
 			var ngModelCtrl = ctrl[0];
 			var template =  "<div class=\"btn-group bootstrap-select\" ng-init=\"current = {}\">\n" +
@@ -29,6 +32,7 @@ angular.module('angular-bootstrap-select', [])
 			var dropdown = angular.element(template);
 			var dropdownScope = scope.$new(true);
 			$compile(dropdown)(dropdownScope);
+
 			// update the classes on the dropdown container whenever they change on the select
 			var initialClasses = dropdown[0].className;
 			attrs.$observe('class', function(classes) {
@@ -41,10 +45,7 @@ angular.module('angular-bootstrap-select', [])
 			// from ngOptionsDirective AngularJS 1.2.0-rc2
 			var NG_OPTIONS_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w\d]*)|(?:\(\s*([\$\w][\$\w\d]*)\s*,\s*([\$\w][\$\w\d]*)\s*\)))\s+in\s+(.*?)(?:\s+track\s+by\s+(.*?))?$/;
 			var match = attrs.ngOptions.match(NG_OPTIONS_REGEXP);
-			var valueName = match[4] || match[6];
-			var valueFn = $parse(match[2] ? match[1] : valueName);
             var valuesFn = $parse(match[7]);
-			var displayFn = $parse(match[2] || match[1]);
 
 			var buildObjFromOptionElement = function( optionEl ) {
 				return {
@@ -67,6 +68,28 @@ angular.module('angular-bootstrap-select', [])
 					o.data(BOOTSTRAP_SELECT_DATA, data);
 					dropdownScope.$options.push(data);
 				});
+
+				if(autoWidth) {
+					// calculate the width of the select
+					$timeout(function() {
+						// find the longest option
+						var last = '';
+						angular.forEach(dropdownScope.$options, function(option) {
+							if(option.label.length > last.length) {
+								last = option.label;
+							}
+						});
+
+						// put it in an invisible div
+						var div = angular.element('<div style="position: absolute; visibility: hidden; height: auto; width: auto;"></div>');
+						div.html(last);
+						dropdown.after(div);
+						var width = div[0].offsetWidth + 'px';
+						div.remove();
+						// set the css
+						angular.element(dropdown.find('span')[0]).css({ 'width': width, 'display': 'inline-block', 'text-align': 'left' });
+					});
+				}
 			};
 
 			var updateSelected = function( val ) {
@@ -93,7 +116,6 @@ angular.module('angular-bootstrap-select', [])
 					element.triggerHandler('change');
 				});
 			});
-
 		}
 	};
 	
