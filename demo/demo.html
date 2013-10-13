@@ -9,18 +9,33 @@
 	</head>
 	<body>
 
-		<div ng-controller="simpleExampleCtrl">
+		<div class="container">
+			<div class="row" ng-controller="simpleExampleCtrl">
 
-			Value of select: {{ currentPerson }}<br>
-			<select bootstrap-select auto-width="true" ng-options="person.name for person in people" ng-model="currentPerson"></select>
+				<h3>Default</h3>
 
-		</div>
+				Value of select: {{ currentPerson }}<br>
+				<select bootstrap-select ng-options="person.name for person in people" ng-model="currentPerson"></select>
 
-		<div ng-controller="selectAsExampleCtrl">
+			</div>
 
-			Value of select: {{ currentPerson }}<br>
-			<select bootstrap-select auto-width="true" ng-options="person as person for person in people" ng-model="currentPerson"></select>
+			<div class="row" ng-controller="selectAsExampleCtrl">
 
+				<h3>Ng-options with select expression</h3>
+
+				Value of select: {{ currentPerson }}<br>
+				<select bootstrap-select ng-options="person as person for person in people" ng-model="currentPerson"></select>
+
+			</div>
+
+			<div class="row" ng-controller="selectAsExampleCtrl">
+
+				<h3>Auto-width option</h3>
+
+				Value of select: {{ currentPerson }}<br>
+				<select bootstrap-select auto-width="true" ng-options="person as person for person in people" ng-model="currentPerson"></select>
+
+			</div>
 		</div>
 
 	</body>
