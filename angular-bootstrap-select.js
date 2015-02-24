@@ -4,17 +4,10 @@ angular.module('angular-bootstrap-select', [])
 
 	return {
 		restrict: 'AE',
-		require: ['?ngModel'],
+		require: ['ngModel'],
 		link: function(scope, element, attrs, ctrl) {
-
-			if(!ctrl[0]) {
-				// we need the ngModel controller
-				return;
-			}
-
 			// options
 			var autoWidth = attrs.autoWidth === "true" ? true : false;
-
 			var BOOTSTRAP_SELECT_DATA = '$bootstrapSelect';
 			var ngModelCtrl = ctrl[0];
 			var template =  "<div class=\"btn-group bootstrap-select\" ng-init=\"current = {}\">\n" +
@@ -118,7 +111,7 @@ angular.module('angular-bootstrap-select', [])
 			});
 		}
 	};
-	
+
 }])
 
 /**
