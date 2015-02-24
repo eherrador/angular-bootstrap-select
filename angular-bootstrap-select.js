@@ -1,11 +1,11 @@
 angular.module('angular-bootstrap-select', [])
 
-.directive('bootstrapSelect', ['$compile', '$parse', '$timeout', function($compile, $parse, $timeout) {
+.directive('bootstrapSelect', ['$compile', '$parse', '$timeout', function ($compile, $parse, $timeout) {
 
 	return {
 		restrict: 'AE',
 		require: ['ngModel'],
-		link: function(scope, element, attrs, ctrl) {
+		link: function (scope, element, attrs, ctrl) {
 			// options
 			var autoWidth = attrs.autoWidth === "true" ? true : false;
 			var BOOTSTRAP_SELECT_DATA = '$bootstrapSelect';
@@ -40,7 +40,7 @@ angular.module('angular-bootstrap-select', [])
 			var match = attrs.ngOptions.match(NG_OPTIONS_REGEXP);
             var valuesFn = $parse(match[7]);
 
-			var buildObjFromOptionElement = function( optionEl ) {
+			var buildObjFromOptionElement = function (optionEl) {
 				return {
 					index: optionEl.val(),
 					label: optionEl.text()
@@ -53,7 +53,7 @@ angular.module('angular-bootstrap-select', [])
 				angular.forEach(options, function(option) {
 					var o = angular.element(option);
 					var data = buildObjFromOptionElement(o);
-					if( items && items[data.index] ) {
+					if (items && items[data.index]) {
 						data.value = items[data.index];
 					} else {
 						data.value = null;
@@ -62,7 +62,7 @@ angular.module('angular-bootstrap-select', [])
 					dropdownScope.$options.push(data);
 				});
 
-				if(autoWidth) {
+				if (autoWidth) {
 					// calculate the width of the select
 					$timeout(function() {
 						// find the longest option
@@ -89,7 +89,7 @@ angular.module('angular-bootstrap-select', [])
 				var options = element.find('option');
 				angular.forEach(options, function(option) {
 					var o = angular.element(option);
-					if( element.val() === o.val() ) {
+					if (element.val() === o.val()) {
 						dropdownScope.current.selection = o.data(BOOTSTRAP_SELECT_DATA);
 						return;
 					}
@@ -98,12 +98,12 @@ angular.module('angular-bootstrap-select', [])
 
 			// update options when the collection changes
 			scope.$watch(valuesFn, updateOptions);
-			scope.$watch(attrs.ngModel, function(n, o) {
+			scope.$watch(attrs.ngModel, function (n, o) {
 				updateSelected(n);
 			});
 
 			// update the select and the model when our selection changes
-			dropdownScope.$watch('current.selection', function(n) {
+			dropdownScope.$watch('current.selection', function (n) {
 				$timeout(function() {
 					element.val(n.index);
 					element.triggerHandler('change');
