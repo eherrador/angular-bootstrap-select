@@ -1,6 +1,6 @@
 angular.module('Demo', ['angular-bootstrap-select'])
 
-.controller('simpleExampleCtrl', function($scope) {
+.controller('simpleExampleCtrl', function ($scope) {
 	$scope.people = [
 		{ name: 'Dan', age: 22 },
 		{ name: 'Steve', age: 43 },
@@ -11,8 +11,8 @@ angular.module('Demo', ['angular-bootstrap-select'])
 	$scope.currentPerson = $scope.people[0];
 })
 
-.controller('selectAsExampleCtrl', function($scope) {
-	$scope.people = [ 'Dan', 'Steve', 'Tim', 'Alex' ];
+.controller('selectAsExampleCtrl', function ($scope) {
+	$scope.people = ['Dan', 'Stephanie', 'Tim', 'George'];
 	$scope.currentPerson = 'Dan';
 })
 
